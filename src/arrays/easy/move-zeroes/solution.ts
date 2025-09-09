@@ -10,8 +10,24 @@ export const moveZeroesToEnd = (arr: number[]): void => {
   for (let i = 0; i < arr.length; i++) {
     // If the current element is not zero, swap it with the element at nonZeroIndex.
     if (arr[i] !== 0) {
-      [arr[nonZeroIndex], arr[i]] = [arr[i], arr[nonZeroIndex]];
+      // Only perform the swap if the element at nonZeroIndex is zero to avoid redundant swaps.
+      if (arr[nonZeroIndex] === 0) {
+        [arr[nonZeroIndex], arr[i]] = [arr[i], arr[nonZeroIndex]];
+      }
       nonZeroIndex++; // Move the nonZeroIndex pointer to the next position.
     }
   }
 };
+
+// Create a large array with a mix of zero and non-zero elements
+const largeArray = Array.from({ length: 1000000 }, (_, i) =>
+  i % 10 === 0 ? 0 : i
+);
+
+const startTime = performance.now();
+
+moveZeroesToEnd(largeArray);
+
+const endTime = performance.now();
+
+console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
