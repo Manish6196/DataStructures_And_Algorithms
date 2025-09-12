@@ -1,43 +1,4 @@
-// Extra implementation for Queue
-class Queue<N> {
-  private items: Record<string, N>;
-  private front: number;
-  private rear: number;
-
-  constructor() {
-    this.items = {};
-    this.front = 0;
-    this.rear = 0;
-  }
-
-  enqueue(element: N) {
-    this.items[this.rear] = element;
-    this.rear++;
-  }
-
-  dequeue() {
-    const item = this.items[this.front];
-    delete this.items[this.front];
-    this.front++;
-    return item;
-  }
-
-  peek() {
-    return this.items[this.front];
-  }
-
-  size() {
-    return this.rear - this.front;
-  }
-
-  isEmpty() {
-    return this.rear - this.front === 0;
-  }
-
-  print() {
-    console.log(this.items);
-  }
-}
+import Queue from "../queue/Queue";
 
 class Node {
   value: number;
@@ -70,14 +31,6 @@ class BinarySearchTree {
       : this.traverseAndPlace(node[side], newNode);
   }
 
-  private traverseAndSearch(node: Node | null, value: number): boolean {
-    if (!node) return false;
-    if (node.value === value) return true;
-    return value < node.value
-      ? this.traverseAndSearch(node.left, value)
-      : this.traverseAndSearch(node.right, value);
-  }
-
   insert(value: number) {
     const newNode = new Node(value);
     if (this.isEmpty()) {
@@ -85,6 +38,14 @@ class BinarySearchTree {
     } else {
       this.traverseAndPlace(this.root as Node, newNode);
     }
+  }
+
+  private traverseAndSearch(node: Node | null, value: number): boolean {
+    if (!node) return false;
+    if (node.value === value) return true;
+    return value < node.value
+      ? this.traverseAndSearch(node.left, value)
+      : this.traverseAndSearch(node.right, value);
   }
 
   has(value: number) {

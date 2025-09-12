@@ -3,9 +3,6 @@
     "target": "ESNext",
     "module": "CommonJS",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "lib": ["ES2020"],
     "noEmit": true
   },
