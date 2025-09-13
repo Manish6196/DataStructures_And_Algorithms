@@ -45,3 +45,5 @@ console.log(mergeSort([8, 20, -2, 4, -6]));
 
 // Worst case - O(nlogn)
 // Average case - O(nlogn)
+
+export default mergeSort;
