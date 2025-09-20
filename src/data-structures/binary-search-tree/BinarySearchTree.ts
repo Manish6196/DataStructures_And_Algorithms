@@ -33,10 +33,10 @@ class BinarySearchTree {
 
   insert(value: number) {
     const newNode = new Node(value);
-    if (this.isEmpty()) {
+    if (this.root === null) {
       this.root = newNode;
     } else {
-      this.traverseAndPlace(this.root as Node, newNode);
+      this.traverseAndPlace(this.root, newNode);
     }
   }
 
@@ -90,9 +90,9 @@ class BinarySearchTree {
 
   // BREADTH FIRST SEARCH (BFS)
   levelOrder() {
-    if (this.isEmpty()) return;
+    if (this.root === null) return;
     const queue = new Queue<Node>();
-    queue.enqueue(this.root as Node);
+    queue.enqueue(this.root);
     while (!queue.isEmpty()) {
       let curr = queue.dequeue();
       console.log(curr.value);
@@ -129,14 +129,14 @@ class BinarySearchTree {
     return this.root === null ? null : this._max(this.root);
   }
 
-  deleteNode(node: Node | null, value: number): Node | null {
+  private _delete(node: Node | null, value: number): Node | null {
     if (node === null) {
       return node;
     }
     if (value < node.value) {
-      node.left = this.deleteNode(node.left, value);
+      node.left = this._delete(node.left, value);
     } else if (value > node.value) {
-      node.right = this.deleteNode(node.right, value);
+      node.right = this._delete(node.right, value);
     } else {
       if (!node.left && !node.right) {
         return null;
@@ -147,13 +147,13 @@ class BinarySearchTree {
         return node.left;
       }
       node.value = this._min(node.right);
-      node.right = this.deleteNode(node.right, node.value);
+      node.right = this._delete(node.right, node.value);
     }
     return node;
   }
 
   delete(value: number) {
-    this.root = this.deleteNode(this.root, value);
+    this.root = this._delete(this.root, value);
   }
 }
 

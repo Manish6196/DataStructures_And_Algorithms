@@ -7,10 +7,6 @@ class Graph {
     this.adjacencyList = {};
   }
 
-  // has(vertex: string): vertex is keyof AdjacencyList {
-  //   return !!this.adjacencyList[vertex];
-  // }
-
   addVertex(vertex: string) {
     if (!this.adjacencyList[vertex]) {
       this.adjacencyList[vertex] = new Set();
