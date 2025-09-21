@@ -1,4 +1,4 @@
-import Queue from "../queue/Queue";
+import Queue from "../../queue/Queue";
 
 class Node {
   value: number;
